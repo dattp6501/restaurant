@@ -1,0 +1,66 @@
+<div id="banner-home" class="carousel slide section-bg" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+            <div class="carousel-caption d-none d-md-block">
+                <h4 data-aos="fade-up">Enjoy Your Health Delicious Food</h4>
+                <p data-aos="fade-up">Sed autem laudantium dolores. Voluptatem itaque ea
+                    consequatur eveniet. Eum quas beatae cumque eum quaerat.
+                </p>
+            </div>
+            <img src="assets/img/hero-img.png" style="height:750px;" class="d-block w-100" alt="...">
+        </div>
+        <div *ngFor="let banner of banners" class="carousel-item" data-bs-interval="10000">
+            <a [href]="'/dish/'+banner.id">
+                <img [src]="banner.image" style="height:750px;" class="d-block w-100" alt="...">
+            </a>
+            <div class="carousel-caption d-none d-md-block">
+                <h4 data-aos="fade-up">{{banner.name}}</h4>
+                <p data-aos="fade-up">{{banner.description}}</p>
+            </div>
+        </div>
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#banner-home" 
+            data-bs-slide-to="0" class="active" aria-label="default" aria-current="true"></button>
+            <button *ngFor="let banner of banners; index as i;" type="button" data-bs-target="#banner-home" 
+            [attr.data-bs-slide-to]="i+1" [attr.aria-label]="banner.name" aria-current="true"></button>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#banner-home"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#banner-home"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<section id="hero" class="hero d-flex align-items-center section-bg">
+    <div class="container">
+        <div class="row justify-content-between gy-5">
+            <div class="font-custom col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+                <h2 data-aos="fade-up">Enjoy Your Healthy<br>Delicious Food</h2>
+                <p data-aos="fade-up">Sed autem laudantium dolores. Voluptatem itaque ea
+                    consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+                <div class="d-flex">
+                    <a href="#book-a-table" class="btn-book-a-table">Book a Table</a>
+                    <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
+                        class="glightbox btn-watch-video d-flex align-items-center"><i
+                            class="bi bi-play-circle"></i><span>Watch Video</span></a>
+                </div>
+            </div>
+            <div data-aos="fade-up" class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+                <img src="assets/img/hero-img.png" class="img-fluid" alt="">
+            </div>
+        </div>
+        <div class="section-header">
+            <h2>Contact</h2>
+            <p>Need Help? <span>Contact Us</span></p>
+          </div>
+  
+          <div class="mb-3">
+            <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d73499.84993673181!2d105.79420097711868!3d21.01787212824589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab9bd9861ca1%3A0xe7887f7b72ca17a9!2sHanoi%2C%20Vietnam!5e0!3m2!1sen!2sus!4v1713603570708!5m2!1sen!2sus" frameborder="0" allowfullscreen></iframe>
+          </div>
+    </div>
+</section>

@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+.icon-custom:hover{
+    cursor: pointer;
+}
+.icon-button{
+    font-size: 25px;
+}
+.price-custom{
+    color: rgba(206, 18, 18, 0.8) !important;
+}
+.btn-custom,
+.btn-custom:focus {
+  font-size: 14px;
+  color: #fff;
+  background: rgba(206, 18, 18, 0.8);
+  padding: 8px 20px;
+  margin-left: 30px;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+.btn-custom:hover,
+.btn-custom:focus:hover {
+  color: #fff;
+  background: rgba(153, 4, 4, 0.8);
+}

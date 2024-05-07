@@ -1,0 +1,67 @@
+<section id="dish" class="menu section-bg">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Menu</h2>
+            <p style="font-size:30px;">Check Our <span>Datmars Menu</span></p>
+        </div>
+        <!-- <ul class="nav nav-tabs d-flex justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
+                    <h4>Starters</h4>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
+                    <h4>Breakfast</h4>
+                </a>
+            </li>
+
+        </ul> -->
+
+        <div class="tab-content">
+            <div class="tab-pane fade active show" id="menu-starters">
+                <!-- <div class="tab-header text-center">
+                    <p>Menu</p>
+                    <h3>Starters</h3>
+                </div> -->
+                <div class="row gy-5">
+                    <div *ngFor="let dish of dishs" class="col-lg-4 menu-item" data-aos="fade-up" data-aos-delay="50">
+                        <img style="height:75%;" [src]="dish.image" class="menu-img img-fluid" [alt]="dish.image">
+                        <a [href]="'#/dish/'+dish.id" class="glightbox">
+                            <h6>{{dish.name}}</h6>
+                        </a>
+                        <p class="ingredients">
+                            {{dish.description}}
+                        </p>
+                        <p style="font-size:20px;" class="price">
+                            <span class="price-custom">
+                                {{dish.price | currency:'VND':'symbol':'1.0-2'}}
+                            </span>
+                            <i style="font-size:24px;" class="bi bi-cart-plus icon-custom"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="tab-pane fade active show" id="menu-breakfast">
+                <div class="tab-header text-center">
+                    <p>Menu</p>
+                    <h3>Breakfast</h3>
+                </div>
+                <div class="row gy-5">
+                    <div *ngFor="let dish of dishs" class="col-lg-4 menu-item">
+                        <a [routerLink]="'dish/'+dish.id" class="glightbox"><img style="height:75%;"
+                                [src]="dish.image" class="menu-img img-fluid" [alt]="dish.image"></a>
+                        <h4>{{dish.name}}</h4>
+                        <p class="ingredients">
+                            {{dish.description}}
+                        </p>
+                        <p class="price">
+                            {{dish.price}} VND
+                        </p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
