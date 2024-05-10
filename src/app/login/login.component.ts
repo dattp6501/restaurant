@@ -3,6 +3,7 @@ import { AuthService } from '../service/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../model/User';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,13 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   
-  constructor(private router: Router, private authService: AuthService, private formBuilder: FormBuilder){
+  constructor(private router: Router, private spinner: NgxSpinnerService, private authService: AuthService, private formBuilder: FormBuilder){
     
   }
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-        username: ['kh1', Validators.required],
-        password: ['1', Validators.required]
+        username: ['', Validators.required],
+        password: ['', Validators.required]
     });
   }
   get f() { return this.loginForm.controls; }
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit{
     if(this.loginForm.invalid) {
       return;
     }
+    this.spinner.show();
     let reqData = {
       "username": this.f['username'].value, 
       "password": this.f['password'].value
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit{
       user.accessToken = respData.accessToken;
       user.refreshToken = respData.refreshToken;
       this.authService.getProfile(user.accessToken+'', (userResp)=>{
+        this.spinner.hide();
         user.id = userResp.id;
         user.firstName = userResp.fullname;
         user.avatar = userResp.avatar;

@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { DishService } from './../service/dish.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,17 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit{
   banners?: any[] | []
-  constructor(private dishService: DishService){
+  public notiContent: any = 'Welcomto DATTPMARS RESTAURANT!';
+  constructor(private spinner: NgxSpinnerService, private dishService: DishService){
 
   }
 
   ngOnInit(): void {
-    console.log("aaaa");
+    this.spinner.show();
     this.getBanner();
   }
 
   getBanner(){
     this.dishService.getListDishHot((dishs)=>{
+      this.spinner.hide();
       this.banners = dishs;
     })
   }

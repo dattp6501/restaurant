@@ -14,6 +14,9 @@ import { DishComponent } from './dish/dish.component';
 import { DishDetailComponent } from './dish-detail/dish-detail.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +39,8 @@ import { ProfileComponent } from './profile/profile.component';
       progressBar: true // Hiển thị thanh tiến trình
     }),
     HttpClientModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

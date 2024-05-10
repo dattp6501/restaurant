@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:"dish", component: DishComponent},
   {path:"dish/:dish_id", component: DishDetailComponent},
   // {path:"table", component: TableComponent},
-  { path: '**', redirectTo: 'home' }
+  { path: '**', redirectTo: 'dish' }
 ];
 
 @NgModule({
