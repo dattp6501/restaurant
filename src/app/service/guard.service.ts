@@ -8,15 +8,18 @@ import { AuthService } from './auth.service';
 })
 class Authentication {
 
-    constructor(private router: Router, private AuthService: AuthService) {}
+    constructor(private router: Router, private authService: AuthService) {}
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        if(this.AuthService.isAuthenticatedUser()){
-            return true;
-        }else{
-            this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
-            return false;
-        }
+        return true;
+        // if(this.authService.isAuthenticated){
+        //     return true;
+        // }else{
+        //     this.authService.getProfile(this.authService.getAccessToken(),(data)=>{
+                
+        //     })
+        //     return true;
+        // }
     }
 }
 

@@ -10,7 +10,6 @@ import { NavigationEnd } from '@angular/router';
 export class AppComponent implements OnInit{
   title = 'restaurent-booking';
   hideHeader: boolean = false;
-  isAuthenticated: boolean = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe(event => {

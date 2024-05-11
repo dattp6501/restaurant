@@ -16,10 +16,7 @@
 // };
 
 export const appconfig = {
-    timeout_toastr: 3000,
-    production: false,
-    host_auth: 'https://auth-restaurant-dattp.onrender.com',
-    host_product: "https://product-restaurant-dattp.onrender.com",
-    key_access_token: "access_token",
-    key_refresh_token: "refresh_token"
+    HOST_AUTH: 'https://auth-restaurant-dattp.onrender.com',
+    HOST_PRODUCT: "https://product-restaurant-dattp.onrender.com",
+    // HOST_PRODUCT: "http://localhost:9001"
 };

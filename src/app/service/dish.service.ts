@@ -3,28 +3,25 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr'; 
+import { HandleErrorResponse } from './HandleErrorResponse';
 
 @Injectable({ providedIn: 'root' })
 export class DishService {
 
-    constructor(private toastr: ToastrService, private router: Router,private http: HttpClient) {
+    constructor(private toastr: ToastrService, private router: Router, private http: HttpClient,
+      private handleError: HandleErrorResponse
+    ) {
     }
     getListDish(successCallback: (data: any) => void) {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json', // Có thể thay đổi loại nội dung nếu cần
           });
-        return this.http.get<Response>(`${appconfig.host_product}/api/product/user/dish`, {headers}).subscribe({
+        return this.http.get<Response>(`${appconfig.HOST_PRODUCT}/api/product/user/dish`, {headers}).subscribe({
             next: (data: any) => {
               successCallback(data.data);
             },
             error: (error) => {
-              if(error.status == 401){
-                
-              }else if(error.status == 403){
-                
-              }else{
-                // this.toastr.error(error.message);
-              }
+              this.handleError.checkaccessToken(error);
             },
             // complete() {
             // },
@@ -35,18 +32,12 @@ export class DishService {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json', // Có thể thay đổi loại nội dung nếu cần
           });
-        return this.http.get<Response>(`${appconfig.host_product}/api/product/user/dish/${reqData.dishId}`, {headers}).subscribe({
+        return this.http.get<Response>(`${appconfig.HOST_PRODUCT}/api/product/user/dish/${reqData.dishId}`, {headers}).subscribe({
             next: (data: any) => {
               successCallback(data.data);
             },
             error: (error) => {
-              if(error.status == 401){
-                
-              }else if(error.status == 403){
-                
-              }else{
-                // this.toastr.error(error.message);
-              }
+              this.handleError.checkaccessToken(error);
             },
             // complete() {
             // },
@@ -57,18 +48,12 @@ export class DishService {
       const headers = new HttpHeaders({
           'Content-Type': 'application/json', // Có thể thay đổi loại nội dung nếu cần
       });
-      return this.http.get<Response>(`${appconfig.host_product}/api/product/user/dish/hot`, {headers}).subscribe({
+      return this.http.get<Response>(`${appconfig.HOST_PRODUCT}/api/product/user/dish/hot`, {headers}).subscribe({
           next: (data: any) => {
             successCallback(data.data);
           },
           error: (error) => {
-            if(error.status == 401){
-              
-            }else if(error.status == 403){
-              
-            }else{
-              // this.toastr.error(error.message);
-            }
+            this.handleError.checkaccessToken(error);
           },
           // complete() {
           // },
