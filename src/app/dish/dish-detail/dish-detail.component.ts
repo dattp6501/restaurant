@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DishService } from '../service/dish.service';
+import { DishService } from '../../service/dish.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 

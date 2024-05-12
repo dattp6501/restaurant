@@ -1,16 +1,25 @@
 import { Injectable } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router"
+import { NgxSpinnerService } from "ngx-spinner";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({ providedIn: 'root' })
 export class HandleErrorResponse{
-    constructor(private router: Router){
+    constructor(private router: Router, private spinner: NgxSpinnerService, private toastr: ToastrService){
 
     }
-    handle(data: any){
-        if(data.status == 401){
-        }else if(data.status == 403){
+    handle(error: any){
+        this.spinner.hide();
+        console.log(error);
+        if(error.status == 401){
+            // this.authService.removeAllStorage();
+            // this.router.navigate(['/login'], {})
+        }else if(error.status == 403){
+            this.toastr.error(error.error.message, 'Error');
+            // this.authService.removeAllStorage();
+            // this.router.navigate(['/login'], {})
         }else{
-            
+            this.toastr.error(error.error.message, 'Error');
         }
     }
 
@@ -18,9 +27,7 @@ export class HandleErrorResponse{
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 if(accessToken==null || accessToken==undefined){
-                    if(event.url.includes('login') || event.url.includes('register') 
-                        || event.url.includes('dish') || event.url.includes('table')) return;
-                    else  this.router.navigate(['/login'], {});
+                    if(event.url.includes('profile') || event.url.includes('cart')) this.router.navigate(['/login'], {});
                 }
             }
           });

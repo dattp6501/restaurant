@@ -1,0 +1,29 @@
+<section id="dish" class="menu section-bg">
+    <div class="container">
+        <div class="section-header">
+            <!-- <h2>Table</h2> -->
+            <p style="font-size:30px;">Table</p>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade active show" id="menu-starters">
+                <div class="row gy-5">
+                    <div *ngFor="let table of tables" class="col-lg-4 menu-item" data-aos="fade-up" data-aos-delay="50">
+                        <img style="height:75%;width:100%;" [src]="table.image" class="menu-img img-fluid" [alt]="table.image">
+                        <a [href]="'#/table/'+table.id" class="glightbox">
+                            <h6>{{table.name}}</h6>
+                        </a>
+                        <p class="ingredients">
+                            {{table.description}}
+                        </p>
+                        <p style="font-size:20px;" class="price">
+                            <span class="price-custom">
+                                {{table.price | currency:'VND':'symbol':'1.0-2'}}
+                            </span>
+                            <i (click)="addTableToCart(table)" style="font-size:24px;" class="bi bi-cart-plus icon-custom"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

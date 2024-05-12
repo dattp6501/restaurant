@@ -7,124 +7,85 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <h5 class="mb-3"><a routerLink="/dish" class="text-body"><i
-                                    class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+                                    class="fas fa-long-arrow-alt-left me-2"></i>Tiếp tục chon</a></h5>
                                 <hr>
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <div>
-                                        <p class="mb-1">Shopping cart</p>
-                                        <p class="mb-0">You have 4 items in your cart</p>
+                                        <p class="mb-1">Danh sách bàn đã chọn</p>
+                                        <p class="mb-0">Bạn có {{this.cartService.TABLE_IN_CART.length}} bàn đã chọn</p>
                                     </div>
-                                    <div>
+                                    <!-- <div>
                                         <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!"
                                                 class="text-body">price <i class="fas fa-angle-down mt-1"></i></a></p>
-                                    </div>
+                                    </div> -->
                                 </div>
 
-                                <div class="card mb-3" *ngFor="let dish of this.cartService.DISH_IN_CART">
+                                <div class="card mb-3" *ngFor="let table of this.cartService.TABLE_IN_CART">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex flex-row align-items-center">
                                                 <div>
-                                                    <img [src]="dish.image"class="img-fluid rounded-3" [alt]="dish.name"style="width: 65px;">
+                                                    <img [src]="table.image"class="img-fluid rounded-3" [alt]="table.name"style="width: 65px;">
                                                 </div>
                                                 <div class="ms-3">
-                                                    <h5>{{dish.name}}</h5>
-                                                    <p class="small mb-0"></p>
+                                                    <h5>{{table.name}}</h5>
+                                                    <!-- <p class="small mb-0"></p> -->
+                                                </div>
+                                                <div class="ms-3">
+                                                    <span>{{table.description}}</span>
+                                                    <!-- <p class="small mb-0"></p> -->
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-row align-items-center">
-                                                <div style="width: 50px;">
+                                                <!-- <div style="width: 50px;">
                                                     <h5 class="fw-normal mb-0">2</h5>
+                                                </div> -->
+                                                <div style="width:100%;">
+                                                    <h5 class="mb-0">{{table.price | currency:'VND':'symbol':'1.0-2'}}</h5>
                                                 </div>
-                                                <div style="width: 80px;">
-                                                    <h5 class="mb-0">{{dish.price | currency:'VND':'symbol':'1.0-2'}}</h5>
-                                                </div>
-                                                <a href="#!" style="color: #cecece;"><i
-                                                        class="fas fa-trash-alt"></i></a>
+                                                <a href="#!" style="color:red;margin-left: 20px;"><i class="fas fa-trash-alt"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-5">
-                                <div class="card bg-primary text-white rounded-3">
+                                <div class="card bg-secondary text-white rounded-3">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center mb-4" >
-                                            <h5 class="mb-0">Card details</h5>
+                                            <h5 class="mb-0">Thông tin đặt bàn</h5>
                                             <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
                                                 class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
                                         </div>
 
-                                        <p class="small mb-2">Card type</p>
-                                        <a href="#!" type="submit" class="text-white"><i
-                                                class="fab fa-cc-mastercard fa-2x me-2"></i></a>
-                                        <a href="#!" type="submit" class="text-white"><i
-                                                class="fab fa-cc-visa fa-2x me-2"></i></a>
-                                        <a href="#!" type="submit" class="text-white"><i
-                                                class="fab fa-cc-amex fa-2x me-2"></i></a>
-                                        <a href="#!" type="submit" class="text-white"><i
-                                                class="fab fa-cc-paypal fa-2x"></i></a>
-
-                                        <form class="mt-4">
-                                            <div data-mdb-input-init class="form-outline form-white mb-4">
-                                                <input type="text" id="typeName" class="form-control form-control-lg"
-                                                    siez="17" placeholder="Cardholder's Name" />
-                                                <label class="form-label" for="typeName">Cardholder's Name</label>
+                                        <form id="formCheckout" [formGroup]="formCheckout" (ngSubmit)="checkout()" class="mt-4">
+                                            <div class="form-outline form-white mb-4">
+                                                <label class="form-label" for="customerName">Tên khách hàng</label>
+                                                <input formControlName="customerName" type="text" id="customerName" class="form-control form-control-lg"
+                                                    placeholder="Tên khách hàng"/>
                                             </div>
 
-                                            <div data-mdb-input-init class="form-outline form-white mb-4">
-                                                <input type="text" id="typeText" class="form-control form-control-lg"
-                                                    siez="17" placeholder="1234 5678 9012 3457" minlength="19"
-                                                    maxlength="19" />
-                                                <label class="form-label" for="typeText">Card Number</label>
+                                            <div class="form-outline form-white mb-4">
+                                                <label class="form-label" for="mail">Email</label>
+                                                <input formControlName="mail" type="text" id="mail" class="form-control form-control-lg"
+                                                    placeholder="example@gmail.com"/>
                                             </div>
 
-                                            <div class="row mb-4">
-                                                <div class="col-md-6">
-                                                    <div data-mdb-input-init class="form-outline form-white">
-                                                        <input type="text" id="typeExp"
-                                                            class="form-control form-control-lg" placeholder="MM/YYYY"
-                                                            size="7" id="exp" minlength="7" maxlength="7" />
-                                                        <label class="form-label" for="typeExp">Expiration</label>
+                                            <!-- <div class="row mb-4">
+                                                <div class="col-md-12">
+                                                    <div class="form-outline form-white">
+                                                        <label class="form-label" for="period">Thời gian</label>
+                                                        <select [(ngModel)]="selectedPeriod" id="period" class="form-select form-control form-control-lg" required>
+                                                            <option *ngFor="let period of listPeriod" [ngValue]="period">{{period.from}}-{{period.to}}</option>
+                                                        </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div data-mdb-input-init class="form-outline form-white">
-                                                        <input type="password" id="typeText"
-                                                            class="form-control form-control-lg"
-                                                            placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3"
-                                                            maxlength="3" />
-                                                        <label class="form-label" for="typeText">Cvv</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                            </div> -->
+                                            <hr class="my-4">
+                                            <button form="formCheckout" type="submit" class="btn btn-custom btn-block">
+                                                <span>Đạt bàn <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                            </button>
                                         </form>
-
-                                        <hr class="my-4">
-
-                                        <div class="d-flex justify-content-between">
-                                            <p class="mb-2">Subtotal</p>
-                                            <p class="mb-2">$4798.00</p>
-                                        </div>
-
-                                        <div class="d-flex justify-content-between">
-                                            <p class="mb-2">Shipping</p>
-                                            <p class="mb-2">$20.00</p>
-                                        </div>
-
-                                        <div class="d-flex justify-content-between mb-4">
-                                            <p class="mb-2">Total(Incl. taxes)</p>
-                                            <p class="mb-2">$4818.00</p>
-                                        </div>
-
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                            class="btn btn-info btn-block btn-lg">
-                                            <div class="d-flex justify-content-between">
-                                                <span>$4818.00</span>
-                                                <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-                                            </div>
-                                        </button>
 
                                     </div>
                                 </div>

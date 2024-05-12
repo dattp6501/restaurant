@@ -16,7 +16,8 @@
 // };
 
 export const appconfig = {
-    HOST_AUTH: 'https://auth-restaurant-dattp.onrender.com',
-    HOST_PRODUCT: "https://product-restaurant-dattp.onrender.com",
-    // HOST_PRODUCT: "http://localhost:9001"
+    HOST_AUTH: 'https://auth.api.restaurant.dattpmars.com',
+    HOST_PRODUCT: "https://product.api.restaurant.dattpmars.com",
+    // HOST_PRODUCT: "http://localhost:9001",
+    HOST_ORDER: 'https://order.api.restaurant.dattpmars.com'
 };
