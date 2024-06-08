@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrderService } from '../service/order.service';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
@@ -26,9 +27,11 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
+    let now = Date.now();
     this.formCheckout = this.formBuilder.group({
       customerName: ['', Validators.required],
-      mail: ['', Validators.required],
+      from: [new DatePipe("en-US").transform(now,"HH:mm:ss dd/MM/yyyy"), Validators.required],
+      to: [new DatePipe("en-US").transform(now,"HH:mm:ss dd/MM/yyyy"), Validators.required],
     });
     this.checkPeriod();
   }
