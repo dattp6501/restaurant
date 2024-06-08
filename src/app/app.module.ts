@@ -18,6 +18,7 @@ import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { TableComponent } from './table/table.component';
+import { NotificationComponent } from './notification/notification.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { TableComponent } from './table/table.component';
     LoginComponent,
     ProfileComponent,
     CartComponent,
-    TableComponent
+    TableComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
