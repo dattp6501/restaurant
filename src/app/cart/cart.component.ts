@@ -4,20 +4,23 @@ import { CartService } from '../service/cart.service';
 import { AuthService } from '../service/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OrderService } from '../service/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent implements OnInit{
+export class CartComponent implements OnInit {
   public formCheckout!: FormGroup;
   public selectedPeriod: any;
   public listPeriod: any[] = [];
   public BOOKING_INFO: any;
   constructor(private spinner: NgxSpinnerService, public cartService: CartService,
+    private orderService: OrderService, private router: Router,
     private authService: AuthService, private toastr: ToastrService, private formBuilder: FormBuilder
-  ){
+  ) {
 
   }
 
@@ -32,7 +35,7 @@ export class CartComponent implements OnInit{
 
   get fc() { return this.formCheckout.controls; }
 
-  checkPeriod(){
+  checkPeriod() {
     this.BOOKING_INFO = {
       "price": 0
     };
@@ -45,7 +48,22 @@ export class CartComponent implements OnInit{
     this.spinner.hide();
   }
 
-  checkout(){
-    console.log(this.fc['customerName'].value);
+  checkout() {
+    let customerName = this.fc['customerName'].value;
+    let from = this.fc['from'].value;
+    let to = this.fc['to'].value;
+    let reqData = {
+      "from": from,
+      "to": to,
+      "custemerFullname": customerName,
+      "tables": this.cartService.TABLE_IN_CART,
+      "description": "test",
+      "accessToken": this.authService.getAccessToken()
+    };
+    this.spinner.show();
+    this.orderService.createOrder(reqData,(respData)=>{
+      this.spinner.hide();
+      this.router.navigate(['/table'], {});
+    })
   }
 }
