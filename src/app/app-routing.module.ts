@@ -9,6 +9,8 @@ import { AuthGuard } from './service/guard.service';
 import { CartComponent } from './cart/cart.component';
 import { TableComponent } from './table/table.component';
 import { NotificationComponent } from './notification/notification.component';
+import { BookingComponent } from './booking/booking.component';
+import { BookingDetailComponent } from './booking/booking-detail/booking-detail.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
@@ -19,7 +21,9 @@ const routes: Routes = [
   {path:"dish/:dish_id", component: DishDetailComponent},
   {path:"table", component: TableComponent},
   {path: "cart", component: CartComponent, canActivate: [AuthGuard]},
-  {path:"notification", component: NotificationComponent},
+  {path:"notification", component: NotificationComponent, canActivate: [AuthGuard]},
+  {path: "booking", component: BookingComponent, canActivate: [AuthGuard]},
+  {path: "booking/:id", component: BookingDetailComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: 'home' }
 ];
 

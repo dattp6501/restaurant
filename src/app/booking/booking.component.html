@@ -1,0 +1,53 @@
+<div id="booking" class="section">
+    <div class="section" style="margin-top:50px;">
+        <div class="container">
+            <div class="row" *ngFor="let booking of this.LIST_BOOKING">
+                <div class="booking-form">
+                    <form>
+                        <div class="row no-margin">
+                            <div class="col-md-11">
+                                <div class="row no-margin">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <span class="form-label">Thời gian đặt</span>
+                                            <h6>{{booking.createAt}}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <span class="form-label">Bắt đầu</span>
+                                            <h6>{{booking.from}}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <span class="form-label">Kết thúc</span>
+                                            <h6>{{booking.to}}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <span class="form-label">Trạng thái</span>
+                                            <h6 style="font-weight:bold;">{{booking.state}}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <span class="form-label">Tiền cọc</span>
+                                            <h6>{{booking.deposits  | currency:'VND':'symbol':'1.0-2'}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-btn" style="padding:0;">
+                                    <button class="submit-btn" (click)="getorderDetail(booking)">Chi tiết</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

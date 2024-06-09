@@ -15,23 +15,41 @@ export class OrderService {
     ) {
     }
 
-	// getListDishInCart(accessToken: any, successCallback: (resp: any) => void){
-	// 	const headers = new HttpHeaders({
-	// 		'Content-Type': 'application/json',
-    //         'access_token': accessToken
-	// 	});
-	// 	return this.http.get<Response>(`${appconfig.HOST_PRODUCT}/api/product/user/cart/dish`, {headers}).subscribe({
-    //         next: (data: any) => {
-    //           successCallback(data.data);
-    //         },
-    //         error: (error) => {
-    //           this.handleError.checkaccessToken(error);
-    //         },
-    //         // complete() {
-    //         // },
-    //       });
+	getListOrder(accessToken: any, successCallback: (resp: any) => void){
+		const headers = new HttpHeaders({
+			'Content-Type': 'application/json',
+            'access_token': accessToken
+		});
+		return this.http.get<Response>(`${appconfig.HOST_ORDER}/api/order/user/booking`, {headers}).subscribe({
+            next: (data: any) => {
+              successCallback(data.data);
+            },
+            error: (error) => {
+              this.handleError.checkaccessToken(error);
+            },
+            // complete() {
+            // },
+          });
 		
-	// }
+	}
+
+	getOrderDetail(accessToken: any, orderId: number, successCallback: (resp: any) => void){
+		const headers = new HttpHeaders({
+			'Content-Type': 'application/json',
+            'access_token': accessToken
+		});
+		return this.http.get<Response>(`${appconfig.HOST_ORDER}/api/order/user/booking/${orderId}`, {headers}).subscribe({
+            next: (data: any) => {
+              successCallback(data.data);
+            },
+            error: (error) => {
+              this.handleError.checkaccessToken(error);
+            },
+            // complete() {
+            // },
+          });
+		
+	}
     
     createOrder(reqData: any, successCallback: (resp: any) => void) {
 		const headers = new HttpHeaders({

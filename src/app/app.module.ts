@@ -19,6 +19,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { TableComponent } from './table/table.component';
 import { NotificationComponent } from './notification/notification.component';
+import { BookingComponent } from './booking/booking.component';
+import { BookingDetailComponent } from './booking/booking-detail/booking-detail.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { NotificationComponent } from './notification/notification.component';
     ProfileComponent,
     CartComponent,
     TableComponent,
-    NotificationComponent
+    NotificationComponent,
+    BookingComponent,
+    BookingDetailComponent
   ],
   imports: [
     BrowserModule,
