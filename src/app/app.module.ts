@@ -21,6 +21,10 @@ import { TableComponent } from './table/table.component';
 import { NotificationComponent } from './notification/notification.component';
 import { BookingComponent } from './booking/booking.component';
 import { BookingDetailComponent } from './booking/booking-detail/booking-detail.component';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -48,11 +52,15 @@ import { BookingDetailComponent } from './booking/booking-detail/booking-detail.
     NgxSpinnerModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
   ],
   providers: [
     provideAnimationsAsync(),
     provideAnimations(),
-    provideToastr()
+    provideToastr(),
+    provideNativeDateAdapter()
   ],
   bootstrap: [AppComponent]
 })

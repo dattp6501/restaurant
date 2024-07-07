@@ -3,10 +3,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CartService } from '../service/cart.service';
 import { AuthService } from '../service/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrderService } from '../service/order.service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import moment from 'moment';
 
 @Component({
   selector: 'app-cart',
@@ -27,11 +28,9 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let date = Date.now();
+    this.date = new FormControl(new Date())
     this.formCheckout = this.formBuilder.group({
-      customerName: ['', Validators.required],
-      from: [new DatePipe("en-US").transform(date,"HH:mm:ss dd/MM/yyyy"), Validators.required],
-      to: [new DatePipe("en-US").transform(date,"HH:mm:ss dd/MM/yyyy"), Validators.required],
+      "customerName": [this.authService.PROFILE.custemerFullname, Validators.required]
     });
     this.checkPeriod();
   }
@@ -58,29 +57,35 @@ export class CartComponent implements OnInit {
     };
     this.listPeriod = [
       {
-        "from": "08:00",
-        "to": "12:00"
-      }
+        "from": "07:30",
+        "to": "09:00"
+      },
+      {
+        "from": "09:30",
+        "to": "11:00"
+      },
     ]
-    // this.spinner.hide();
+    this.selectedPeriod = this.listPeriod[0];
   }
 
   checkout() {
     let customerName = this.fc['customerName'].value;
-    let from = this.fc['from'].value;
-    let to = this.fc['to'].value;
+    let from = moment(this.date.value).format("YYYY/MM/DD ") + this.selectedPeriod.from;
+    let to = moment(this.date.value).format("YYYY/MM/DD ") + this.selectedPeriod.to;
     let reqData = {
       "from": from,
       "to": to,
       "custemerFullname": customerName,
       "tables": this.cartService.TABLE_IN_CART,
+      "dishs": this.cartService.DISH_IN_CART,
       "description": "test",
       "accessToken": this.authService.getAccessToken()
     };
-    this.spinner.show();
-    this.orderService.createOrder(reqData,(respData)=>{
-      this.spinner.hide();
-      this.router.navigate(['/table'], {});
-    })
+    console.log(reqData);
+    // this.spinner.show();
+    // this.orderService.createOrder(reqData,(respData)=>{
+    //   this.spinner.hide();
+    //   this.router.navigate(['/table'], {});
+    // })
   }
 }

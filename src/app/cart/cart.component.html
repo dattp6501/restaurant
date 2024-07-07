@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-5">
-                                <div class="card bg-secondary text-white rounded-3">
+                                <div class="card text-white rounded-3" style="background-color:rgba(206, 18, 18, 0.8) !important;">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center mb-4">
                                             <h5 class="mb-0">Thông tin đặt bàn</h5>
@@ -65,58 +65,39 @@
                                         <form id="formCheckout" [formGroup]="formCheckout" (ngSubmit)="checkout()"
                                             class="mt-4">
                                             <div class="form-outline form-white mb-4">
-                                                <label class="form-label" for="customerName">Tên khách hàng</label>
+                                                <label class="form-label" for="customerName">Tên khách hàng <span>*</span></label>
                                                 <input formControlName="customerName" type="text" id="customerName"
                                                     class="form-control form-control-lg" placeholder="Tên khách hàng" />
                                             </div>
 
 
-                                            <!-- <div class="form-outline form-white mb-4">
-                                                <mat-form-field>
-                                                    <mat-label>Ngày</mat-label>
-                                                    <input matInput [matDatepicker]="picker1" [formControl]="date">
-                                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                            <div class="form-outline form-white mb-4">
+                                                <mat-form-field class="form-control">
+                                                    <mat-label>Ngày <span>*</span></mat-label>
+                                                    <input matInput [matDatepicker]="picker1" [formControl]="date" placeholder="MM/DD/YYYY">
                                                     <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                                                     <mat-datepicker #picker1></mat-datepicker>
                                                 </mat-form-field>
-                                            </div> -->
-
-                                            <div class="form-outline form-white mb-4">
-                                                <label class="form-label" for="from">From</label>
-                                                <input formControlName="from" type="text" id="from"
-                                                    class="form-control form-control-lg"
-                                                    placeholder="HH:mm dd/MM/yyyy" />
                                             </div>
-                                            <div class="form-outline form-white mb-4">
-                                                <label class="form-label" for="to">To</label>
-                                                <input formControlName="to" type="text" id="to"
-                                                    class="form-control form-control-lg"
-                                                    placeholder="HH:mm dd/MM/yyyy" />
-                                            </div>
-
-                                            <!-- <div class="row mb-4">
+                                            <div class="row mb-4">
                                                 <div class="col-md-12">
                                                     <div class="form-outline form-white">
-                                                        <label class="form-label" for="period">Thời gian</label>
+                                                        <label class="form-label" for="period">Thời gian <span>*</span></label>
                                                         <select [(ngModel)]="selectedPeriod" id="period" class="form-select form-control form-control-lg" required>
                                                             <option *ngFor="let period of listPeriod" [ngValue]="period">{{period.from}}-{{period.to}}</option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div> -->
+                                            </div>
                                             <hr class="my-4">
-                                            <button form="formCheckout" type="submit" class="btn btn-custom btn-block">
+                                            <button form="formCheckout" type="submit" class="btn btn-block text-white">
                                                 <span>Đạt bàn <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                                             </button>
                                         </form>
-
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
