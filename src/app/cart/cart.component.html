@@ -7,12 +7,12 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <h5 class="mb-3"><a routerLink="/dish" class="text-body"><i
-                                    class="fas fa-long-arrow-alt-left me-2"></i>Tiếp tục chon</a></h5>
+                                            class="fas fa-long-arrow-alt-left me-2"></i>Tiếp tục chon</a></h5>
                                 <hr>
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <div>
-                                        <p class="mb-1">Danh sách bàn đã chọn</p>
-                                        <p class="mb-0">Bạn có {{this.cartService.TABLE_IN_CART.length}} bàn đã chọn</p>
+                                        <p class="mb-1">Danh sách món đã chọn</p>
+                                        <p class="mb-0">Bạn có {{this.cartService.DISH_IN_CART.length}} món đã chọn</p>
                                     </div>
                                     <!-- <div>
                                         <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!"
@@ -20,19 +20,20 @@
                                     </div> -->
                                 </div>
 
-                                <div class="card mb-3" *ngFor="let table of this.cartService.TABLE_IN_CART">
+                                <div class="card mb-3" *ngFor="let dish of this.cartService.DISH_IN_CART">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex flex-row align-items-center">
                                                 <div>
-                                                    <img [src]="table.image"class="img-fluid rounded-3" [alt]="table.name"style="width: 65px;">
+                                                    <img [src]="dish.image" class="img-fluid rounded-3"
+                                                        [alt]="dish.name" style="width: 65px;">
                                                 </div>
                                                 <div class="ms-3">
-                                                    <h5>{{table.name}}</h5>
+                                                    <h5>{{dish.name}}</h5>
                                                     <!-- <p class="small mb-0"></p> -->
                                                 </div>
                                                 <div class="ms-3">
-                                                    <span>{{table.description}}</span>
+                                                    <span>{{dish.description}}</span>
                                                     <!-- <p class="small mb-0"></p> -->
                                                 </div>
                                             </div>
@@ -41,9 +42,12 @@
                                                     <h5 class="fw-normal mb-0">2</h5>
                                                 </div> -->
                                                 <div style="width:100%;">
-                                                    <h5 class="mb-0">{{table.price | currency:'VND':'symbol':'1.0-2'}}</h5>
+                                                    <h5 class="mb-0">{{dish.price | currency:'VND':'symbol':'1.0-2'}}
+                                                    </h5>
                                                 </div>
-                                                <a href="#!" style="color:red;margin-left: 20px;"><i class="fas fa-trash-alt"></i></a>
+                                                <a type="button" (click)="deleteDishInCart(dish.id)"
+                                                    style="color:red;margin-left: 20px;"><i
+                                                        class="fas fa-trash-alt"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -52,28 +56,42 @@
                             <div class="col-lg-5">
                                 <div class="card bg-secondary text-white rounded-3">
                                     <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center mb-4" >
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
                                             <h5 class="mb-0">Thông tin đặt bàn</h5>
                                             <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
                                                 class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
                                         </div>
 
-                                        <form id="formCheckout" [formGroup]="formCheckout" (ngSubmit)="checkout()" class="mt-4">
+                                        <form id="formCheckout" [formGroup]="formCheckout" (ngSubmit)="checkout()"
+                                            class="mt-4">
                                             <div class="form-outline form-white mb-4">
                                                 <label class="form-label" for="customerName">Tên khách hàng</label>
-                                                <input formControlName="customerName" type="text" id="customerName" class="form-control form-control-lg"
-                                                    placeholder="Tên khách hàng"/>
+                                                <input formControlName="customerName" type="text" id="customerName"
+                                                    class="form-control form-control-lg" placeholder="Tên khách hàng" />
                                             </div>
+
+
+                                            <!-- <div class="form-outline form-white mb-4">
+                                                <mat-form-field>
+                                                    <mat-label>Ngày</mat-label>
+                                                    <input matInput [matDatepicker]="picker1" [formControl]="date">
+                                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                                    <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1></mat-datepicker>
+                                                </mat-form-field>
+                                            </div> -->
 
                                             <div class="form-outline form-white mb-4">
                                                 <label class="form-label" for="from">From</label>
-                                                <input formControlName="from" type="text" id="from" class="form-control form-control-lg"
-                                                    placeholder="HH:mm dd/MM/yyyy"/>
+                                                <input formControlName="from" type="text" id="from"
+                                                    class="form-control form-control-lg"
+                                                    placeholder="HH:mm dd/MM/yyyy" />
                                             </div>
                                             <div class="form-outline form-white mb-4">
                                                 <label class="form-label" for="to">To</label>
-                                                <input formControlName="to" type="text" id="to" class="form-control form-control-lg"
-                                                    placeholder="HH:mm dd/MM/yyyy"/>
+                                                <input formControlName="to" type="text" id="to"
+                                                    class="form-control form-control-lg"
+                                                    placeholder="HH:mm dd/MM/yyyy" />
                                             </div>
 
                                             <!-- <div class="row mb-4">

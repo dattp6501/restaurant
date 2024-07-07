@@ -16,7 +16,6 @@ export class HeaderComponent implements OnInit{
   ngOnInit(): void {
     this.checkIsLogin();
     this.getListDishInCart();
-    this.getListTableInCart();
   }
 
   logout(){
@@ -43,6 +42,7 @@ export class HeaderComponent implements OnInit{
   }
 
   getListDishInCart(){
+    this.spinner.show();
     let accessToken = this.authService.getAccessToken();
     if(accessToken){
       this.cartService.getListDishInCart(accessToken, (dishs)=>{
@@ -51,15 +51,4 @@ export class HeaderComponent implements OnInit{
       })
     }
   }
-
-  getListTableInCart(){
-    let accessToken = this.authService.getAccessToken();
-    if(accessToken){
-      this.cartService.getListTableInCart(accessToken, (tables)=>{
-        this.spinner.hide();
-        this.cartService.TABLE_IN_CART = tables;
-      })
-    }
-  }
-    
 }

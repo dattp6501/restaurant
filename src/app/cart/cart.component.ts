@@ -18,6 +18,7 @@ export class CartComponent implements OnInit {
   public selectedPeriod: any;
   public listPeriod: any[] = [];
   public BOOKING_INFO: any;
+  public date: any;
   constructor(private spinner: NgxSpinnerService, public cartService: CartService,
     private orderService: OrderService, private router: Router,
     private authService: AuthService, private toastr: ToastrService, private formBuilder: FormBuilder
@@ -26,14 +27,27 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.spinner.show();
-    let now = Date.now();
+    let date = Date.now();
     this.formCheckout = this.formBuilder.group({
       customerName: ['', Validators.required],
-      from: [new DatePipe("en-US").transform(now,"HH:mm:ss dd/MM/yyyy"), Validators.required],
-      to: [new DatePipe("en-US").transform(now,"HH:mm:ss dd/MM/yyyy"), Validators.required],
+      from: [new DatePipe("en-US").transform(date,"HH:mm:ss dd/MM/yyyy"), Validators.required],
+      to: [new DatePipe("en-US").transform(date,"HH:mm:ss dd/MM/yyyy"), Validators.required],
     });
     this.checkPeriod();
+  }
+
+  deleteDishInCart(dishId: any){
+    this.spinner.show();
+    let reqData = {
+      "dishId": dishId,
+      "accessToken": this.authService.getAccessToken()
+    }
+    this.cartService.deleteDishInCart(reqData, (respData)=>{
+      this.cartService.getListDishInCart(this.authService.getAccessToken(), (dishs)=>{
+        this.spinner.hide();
+        this.cartService.DISH_IN_CART = dishs;
+      })
+    });
   }
 
   get fc() { return this.formCheckout.controls; }
@@ -48,7 +62,7 @@ export class CartComponent implements OnInit {
         "to": "12:00"
       }
     ]
-    this.spinner.hide();
+    // this.spinner.hide();
   }
 
   checkout() {

@@ -51,12 +51,12 @@ export class CartService {
 		});
 	}
 
-	getListTableInCart(accessToken: any, successCallback: (resp: any) => void){
+	deleteDishInCart(reqData: any, successCallback: (resp: any) => void){
 		const headers = new HttpHeaders({
 			'Content-Type': 'application/json',
-            'access_token': accessToken
+            'access_token': reqData.accessToken
 		});
-		return this.http.get<Response>(`${appconfig.HOST_PRODUCT}/api/product/user/cart/table`, {headers}).subscribe({
+		return this.http.delete<Response>(`${appconfig.HOST_PRODUCT}/api/product/user/cart/dish/${reqData.dishId}`, {headers}).subscribe({
             next: (data: any) => {
               successCallback(data.data);
             },
@@ -67,23 +67,5 @@ export class CartService {
             // },
           });
 		
-	}
-    
-    addTableToCart(reqData: any, successCallback: (resp: any) => void) {
-		const headers = new HttpHeaders({
-			'Content-Type': 'application/json',
-            'access_token': reqData.accessToken
-		});
-        reqData.accessToken = undefined;
-		return this.http.post<any>(`${appconfig.HOST_PRODUCT}/api/product/user/cart/table`, reqData, { headers }).subscribe({
-			next: (data: any) => {
-				successCallback(data);
-			},
-			error: (error) => {
-				this.handleError.handle(error);
-			},
-			// complete() {
-			// },
-		});
 	}
 }

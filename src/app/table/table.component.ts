@@ -26,18 +26,4 @@ export class TableComponent {
       this.tables = tables;
     });
   }
-
-  addTableToCart(table: any){
-    let reqData = {
-      "accessToken": this.authService.getAccessToken(),
-      "tableId": table.id
-    }
-    this.spinner.show();
-    this.cartService.addTableToCart(reqData, (respData)=>{
-      this.cartService.getListTableInCart(this.authService.getAccessToken(),(tables)=>{
-        this.spinner.hide();
-        this.cartService.TABLE_IN_CART = tables;
-      })
-    });
-  }
 }
