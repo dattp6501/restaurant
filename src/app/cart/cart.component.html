@@ -65,13 +65,6 @@
                                         <form id="formCheckout" [formGroup]="formCheckout" (ngSubmit)="checkout()"
                                             class="mt-4">
                                             <div class="form-outline form-white mb-4">
-                                                <label class="form-label" for="customerName">Tên khách hàng <span>*</span></label>
-                                                <input formControlName="customerName" type="text" id="customerName"
-                                                    class="form-control form-control-lg" placeholder="Tên khách hàng" />
-                                            </div>
-
-
-                                            <div class="form-outline form-white mb-4">
                                                 <mat-form-field class="form-control">
                                                     <mat-label>Ngày <span>*</span></mat-label>
                                                     <input matInput [matDatepicker]="picker1" [formControl]="date" placeholder="MM/DD/YYYY">
@@ -79,15 +72,15 @@
                                                     <mat-datepicker #picker1></mat-datepicker>
                                                 </mat-form-field>
                                             </div>
-                                            <div class="row mb-4">
-                                                <div class="col-md-12">
-                                                    <div class="form-outline form-white">
-                                                        <label class="form-label" for="period">Thời gian <span>*</span></label>
-                                                        <select [(ngModel)]="selectedPeriod" id="period" class="form-select form-control form-control-lg" required>
-                                                            <option *ngFor="let period of listPeriod" [ngValue]="period">{{period.from}}-{{period.to}}</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                            <div class="form-outline form-white mb-4">
+                                                <mat-form-field appearance="fill" class="form-control">
+                                                    <mat-label>Thời gian</mat-label>
+                                                    <mat-select [(value)]="selectedTime">
+                                                        <mat-option *ngFor="let time of LIST_TIME" [value]="time">
+                                                            {{time.from + ' - ' + time.to}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
                                             </div>
                                             <hr class="my-4">
                                             <button form="formCheckout" type="submit" class="btn btn-block text-white">

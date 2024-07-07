@@ -1,0 +1,67 @@
+<div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <div class="row row-cols-lg-12" style="margin-bottom: 20px;">
+        <div class="col" style="padding:0;">
+            <mat-form-field class="mat-elevation-z8">
+                <mat-label>Ngày <span>*</span></mat-label>
+                <input matInput [matDatepicker]="picker1" [formControl]="date" placeholder="MM/DD/YYYY">
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field appearance="fill" class="mat-elevation-z8">
+                <mat-label>Thời gian</mat-label>
+                <mat-select [(value)]="selectedTime">
+                    <mat-option *ngFor="let time of LIST_TIME" [value]="time">
+                        {{time.from + ' - ' + time.to}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+                <tr mat-header-row *matHeaderRowDef="this.TABLE_CONFIG.header"></tr>
+                <tr mat-row *matRowDef="let row; columns: this.TABLE_CONFIG.header;"></tr>
+                <ng-container matColumnDef="image">
+                    <th mat-header-cell *matHeaderCellDef> Ảnh </th>
+                    <td mat-cell *matCellDef="let element" style="width:200px;height:200px;">
+                        <img [src]="element.image" alt="..." class="img-thumbnail">
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Tên bàn </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+                <ng-container matColumnDef="size">
+                    <th mat-header-cell *matHeaderCellDef> Sô ghê </th>
+                    <td mat-cell *matCellDef="let element"> {{element.amountOfPeople}} </td>
+                </ng-container>
+                <ng-container matColumnDef="freetime">
+                    <th mat-header-cell *matHeaderCellDef> Thời gian trống </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngFor="let time of element.freetime">
+                            {{element.freetime.from}}-{{element.to}}
+                        </span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="price">
+                    <th mat-header-cell *matHeaderCellDef> Giá </th>
+                    <td mat-cell *matCellDef="let element"> {{element.price | currency:'VND':'symbol':'1.0-2'}} </td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> Chọn </th>
+                    <td mat-cell *matCellDef="let element">
+                        
+                    </td>
+                </ng-container>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="this.TABLE_CONFIG.pageSizeOptions"
+                [pageSize]="this.TABLE_CONFIG.pageSizeOptions[0]" showFirstLastButtons (page)="onPageChange($event)"
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

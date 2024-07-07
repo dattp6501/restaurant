@@ -11,6 +11,7 @@ import { TableComponent } from './table/table.component';
 import { NotificationComponent } from './notification/notification.component';
 import { BookingComponent } from './booking/booking.component';
 import { BookingDetailComponent } from './booking/booking-detail/booking-detail.component';
+import { TableFreetimeComponent } from './table-freetime/table-freetime.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path:"notification", component: NotificationComponent, canActivate: [AuthGuard]},
   {path: "booking", component: BookingComponent, canActivate: [AuthGuard]},
   {path: "booking/:id", component: BookingDetailComponent, canActivate: [AuthGuard]},
+  {path: "table-freetime", component: TableFreetimeComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: 'home' }
 ];
 

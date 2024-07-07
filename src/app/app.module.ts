@@ -25,6 +25,11 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { TableFreetimeComponent } from './table-freetime/table-freetime.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -41,7 +46,8 @@ import {MatInputModule} from '@angular/material/input';
     TableComponent,
     NotificationComponent,
     BookingComponent,
-    BookingDetailComponent
+    BookingDetailComponent,
+    TableFreetimeComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +61,10 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
+    MatTableModule, 
+    MatPaginatorModule,
+    MatSelectModule,
+    MatCheckboxModule,
   ],
   providers: [
     provideAnimationsAsync(),
